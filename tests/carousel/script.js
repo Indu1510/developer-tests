@@ -8,6 +8,7 @@ for (let i = 0; i < boxes.length; i++) {
     div.id = `box${i + 1}`;
     carousel.appendChild(div);
 }
+var n = boxes.length;
 update()
 
 function previous() {
@@ -22,9 +23,9 @@ function update() {
     var boxes = document.getElementsByClassName('box');
     for (let i = 0; i < boxes.length; i++) {
         boxes[i].classList.remove('previous', 'next', 'current');
-
     }
-    boxes[current - 1].classList.add('previous');
-    boxes[current].classList.add('current');
-    boxes[current + 1].classList.add('next');
+    if((current-1) < 0) current = n;
+    boxes[(current - 1) % n].classList.add('previous');
+    boxes[current % n].classList.add('current');
+    boxes[(current + 1) % n].classList.add('next');
 }
